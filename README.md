@@ -11,6 +11,7 @@ Bu proje, Türk Eğitim Vakfı’nın KPI ve aksiyon yönetimini kolaylaştırma
 - Raporlama ve görselleştirme
 - Şifre maskeli kullanıcı yönetimi
 - Excel dışa aktarma ve dosya yükleme özellikleri
+- Yaklaşan aksiyonların Mail ile bildirimi
 
 ## 📁 Klasör Yapısı
 
@@ -33,6 +34,7 @@ aksiyonModulu/
 │   └── Açık_İşler.py
 │
 ├── requirements.txt
+├── termin_uyarisi.py
 ├── Anasayfa.py
 ├── README.md
 ├── run.py
@@ -63,11 +65,13 @@ Aşağıdaki dosyalar proje dizininde bulunmalıdır:
 TEV_2024_KPI.xlsx
 Aksiyonlar.xlsx
 kullanicilar.xlsx
+mail_pass.txt
 
 MongoDB'in localhost:27017'de çalışıyor olması gerekir.
 
 📬 İletişim
 Bu modül, TEV Dijital Dönüşüm kapsamında geliştirilmiştir.
 """
+
 
 
