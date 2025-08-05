@@ -55,14 +55,13 @@ pip install -r requirements.txt
 
 # 4. Uygulamayı başlat
 streamlit run Anasayfa.py
+```
 
-Gereken Dosyalar
+# Gereken Dosyalar
 Aşağıdaki dosyalar proje dizininde bulunmalıdır:
 
 TEV_2024_KPI.xlsx
-
 Aksiyonlar.xlsx
-
 kullanicilar.xlsx
 
 MongoDB'in localhost:27017'de çalışıyor olması gerekir.
@@ -71,10 +70,4 @@ MongoDB'in localhost:27017'de çalışıyor olması gerekir.
 Bu modül, TEV Dijital Dönüşüm kapsamında geliştirilmiştir.
 """
 
-Dosyaları kaydet
-with open(os.path.join(base_dir, "requirements.txt"), "w") as f:
-f.write(requirements.strip())
-
-with open(os.path.join(base_dir, "README.md"), "w") as f:
-f.write(readme.strip())
 
