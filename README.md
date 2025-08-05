@@ -12,26 +12,31 @@ Bu proje, Türk Eğitim Vakfı’nın KPI ve aksiyon yönetimini kolaylaştırma
 - Şifre maskeli kullanıcı yönetimi
 - Excel dışa aktarma ve dosya yükleme özellikleri
 
-## 🏗️ Klasör Yapısı
+## 📁 Klasör Yapısı
+
+```text
 aksiyonModulu/
 │
 ├── aksiyon_kpi_modulu/
-│ ├── config.py
-│ ├── database.py
-│ ├── auth.py
-│ ├── utils.py
-│ ├── ui_main.py
-│ └── pages/
-│ ├── 1_📝_Aksiyon_Ekle.py
-│ ├── 2_📊_Aksiyon_Guncelle.py
-│ ├── 3_📈_Raporlama.py
-│ ├── 4_📅_Takvim.py
-│ ├── 5_🕓_Log.py
-│ ├── 6_👤_Kullanici_Yonetimi.py
-│ └── 7_📋_Acik_Isler.py
+│   ├── config.py
+│   ├── database.py
+│   ├── auth.py
+│   ├── utils.py
+│
+├── pages/
+│   ├── Aksiyon_Ekle.py
+│   ├── Aksiyon_Güncelle.py
+│   ├── Raporlama.py
+│   ├── Takvim.py
+│   ├── Log.py
+│   ├── Kullanıcı_Yönetimi.py
+│   └── Açık_İşler.py
 │
 ├── requirements.txt
+├── Anasayfa.py
 ├── README.md
+├── run.py
+```
 
 ## 💻 Kurulum
 
@@ -49,7 +54,7 @@ venv\\Scripts\\activate    # (Windows)
 pip install -r requirements.txt
 
 # 4. Uygulamayı başlat
-streamlit run aksiyon_kpi_modulu/ui_main.py
+streamlit run Anasayfa.py
 
 Gereken Dosyalar
 Aşağıdaki dosyalar proje dizininde bulunmalıdır:
@@ -72,3 +77,4 @@ f.write(requirements.strip())
 
 with open(os.path.join(base_dir, "README.md"), "w") as f:
 f.write(readme.strip())
+
