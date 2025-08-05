@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug  5 14:09:44 2025
+
+@author: bozen
+"""
+
+from aksiyon_kpi_modulu.database import tev_calisan
+
+def kullanici_dogrula(kullanici_adi, sifre):
+    user = tev_calisan.find_one({"Kullanıcı": kullanici_adi, "Şifre": sifre})
+    if user:
+        birimler = user.get("Birim", "")
+        rol = user.get("Rol", "")
+        birim_listesi = [b.strip() for b in birimler.split(",")] if isinstance(birimler, str) else []
+        return {"birimler": birim_listesi, "rol": rol}
+    return None

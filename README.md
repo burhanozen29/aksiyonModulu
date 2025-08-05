@@ -20,18 +20,16 @@ aksiyonModulu/
 │ ├── database.py
 │ ├── auth.py
 │ ├── utils.py
+│ ├── ui_main.py
+│ └── pages/
+│ ├── 1_📝_Aksiyon_Ekle.py
+│ ├── 2_📊_Aksiyon_Guncelle.py
+│ ├── 3_📈_Raporlama.py
+│ ├── 4_📅_Takvim.py
+│ ├── 5_🕓_Log.py
+│ ├── 6_👤_Kullanici_Yonetimi.py
+│ └── 7_📋_Acik_Isler.py
 │
-├── pages/
-│ ├── Aksiyon_Ekle.py
-│ ├── Aksiyon_Güncelle.py
-│ ├── Raporlama.py
-│ ├── Takvim.py
-│ ├── Log.py
-│ ├── Kullanıcı_Yönetimi.py
-│ └── Açık_İşler.py
-│
-├── Anasayfa.py
-├── run.py
 ├── requirements.txt
 ├── README.md
 
@@ -51,7 +49,7 @@ venv\\Scripts\\activate    # (Windows)
 pip install -r requirements.txt
 
 # 4. Uygulamayı başlat
-streamlit run Anasayfa.py
+streamlit run aksiyon_kpi_modulu/ui_main.py
 
 Gereken Dosyalar
 Aşağıdaki dosyalar proje dizininde bulunmalıdır:
