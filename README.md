@@ -1,78 +1,74 @@
-# 🎯 Aksiyon ve KPI Yönetim Modülü
+# 📊 TEV KPI & Aksiyon Takip Modülü
 
-Bu proje, kurum içi performans hedeflerini (KPI) ve bu hedeflere yönelik aksiyonları yönetmek amacıyla geliştirilmiş kullanıcı dostu bir Python / Streamlit uygulamasıdır.
+Bu proje, Türk Eğitim Vakfı’nın KPI ve aksiyon yönetimini kolaylaştırmak için geliştirilmiş bir Streamlit uygulamasıdır.
 
 ## 🚀 Özellikler
 
-- ✅ KPI tanımlama ve güncelleme
-- ✅ Aksiyon planı oluşturma
-- ✅ Dosya (kanıt belgesi) yükleme ve takibi
-- ✅ Kullanıcı ve birim bazlı yetkilendirme
-- ✅ Raporlama, filtreleme ve grafikle analiz
-- ✅ Zaman çizelgesi (timeline) görselleştirme
-- ✅ Admin paneli ile kullanıcı yönetimi
+- Giriş ekranı ve kullanıcı doğrulama (MongoDB destekli)
+- KPI ve aksiyon ekleme, güncelleme, loglama
+- Strateji bazlı KPI takibi
+- Timeline görünümü
+- Raporlama ve görselleştirme
+- Şifre maskeli kullanıcı yönetimi
+- Excel dışa aktarma ve dosya yükleme özellikleri
 
----
-
-## 🖥️ Kullanılan Teknolojiler
-
-- [Python 3.9+](https://www.python.org/)
-- [Streamlit](https://streamlit.io/)
-- [Pandas](https://pandas.pydata.org/)
-- [Plotly](https://plotly.com/)
-- [Openpyxl & XlsxWriter](https://openpyxl.readthedocs.io/)
-
----
-
-## 📁 Proje Yapısı
-
+## 🏗️ Klasör Yapısı
 aksiyonModulu/
 │
-├── app.py # Ana uygulama dosyası
-├── config.py # Dosya yolları
-├── utils.py # Yardımcı fonksiyonlar
+├── aksiyon_kpi_modulu/
+│ ├── config.py
+│ ├── database.py
+│ ├── auth.py
+│ ├── utils.py
+│ ├── ui_main.py
+│ └── pages/
+│ ├── 1_📝_Aksiyon_Ekle.py
+│ ├── 2_📊_Aksiyon_Guncelle.py
+│ ├── 3_📈_Raporlama.py
+│ ├── 4_📅_Takvim.py
+│ ├── 5_🕓_Log.py
+│ ├── 6_👤_Kullanici_Yonetimi.py
+│ └── 7_📋_Acik_Isler.py
+│
 ├── requirements.txt
 ├── README.md
-│
-├── pages/ # Sayfa modülleri
-│ ├── aksiyon_ekle.py
-│ ├── aksiyon_guncelle.py
-│ ├── aksiyon_raporlama.py
-│ ├── kullanici_yonetimi.py
-│ └── timeline.py
-│
-└── data/ # Veri dosyaları
-├── TEV_2024_KPI.xlsx
-├── kullanicilar.xlsx
-├── log_kpi_guncelleme.xlsx
-├── Aksiyonlar.xlsx
-└── kanitlar/ # Yüklenen belgeler klasörü
 
-
----
-
-## ⚙️ Kurulum
-
-1. Bu repoyu klonla:
+## 💻 Kurulum
 
 ```bash
+# 1. Repo'yu klonla
 git clone https://github.com/burhanozen29/aksiyonModulu.git
 cd aksiyonModulu
 
-2. Gerekli kütüphaneleri yükle:
+# 2. Ortamı hazırla
+python -m venv venv
+source venv/bin/activate   # (Linux/macOS)
+venv\\Scripts\\activate    # (Windows)
+
+# 3. Bağımlılıkları yükle
 pip install -r requirements.txt
 
-3. Uygulamayı çalıştır:
-streamlit run app.py
+# 4. Uygulamayı başlat
+streamlit run aksiyon_kpi_modulu/ui_main.py
 
-Notlar
-Uygulama sadece .xlsx dosyaları ile çalışır, veritabanı kullanılmaz.
+Gereken Dosyalar
+Aşağıdaki dosyalar proje dizininde bulunmalıdır:
 
-Geliştirme ortamı: Spyder / VSCode / Jupyter + Anaconda
+TEV_2024_KPI.xlsx
 
-Proje geliştirme aşamasındadır, geri bildirimlerinize açığız.
+Aksiyonlar.xlsx
+
+kullanicilar.xlsx
+
+MongoDB'in localhost:27017'de çalışıyor olması gerekir.
 
 📬 İletişim
-Burhan Özen
-📧 burhan.ozen@outlook.com
-🔗 GitHub: @burhanozen29
+Bu modül, TEV Dijital Dönüşüm kapsamında geliştirilmiştir.
+"""
+
+Dosyaları kaydet
+with open(os.path.join(base_dir, "requirements.txt"), "w") as f:
+f.write(requirements.strip())
+
+with open(os.path.join(base_dir, "README.md"), "w") as f:
+f.write(readme.strip())
