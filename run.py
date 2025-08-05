@@ -8,4 +8,5 @@ Created on Tue Aug  5 14:26:39 2025
 import os
 
 # Streamlit ana uygulamasını başlat
-os.system("streamlit run aksiyon_kpi_modulu/ui_main.py")
+
+os.system("streamlit run aksiyon_kpi_modulu/Anasayfa.py")
