@@ -9,4 +9,5 @@ import os
 
 # Streamlit ana uygulamasını başlat
 
-os.system("streamlit run aksiyon_kpi_modulu/Anasayfa.py")
+os.system("streamlit run Anasayfa.py")
+
