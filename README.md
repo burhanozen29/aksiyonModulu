@@ -41,6 +41,7 @@ aksiyonModulu/
 │   ├── Takvim.py
 │   ├── Log.py
 │   ├── Kullanıcı_Yönetimi.py
+│   ├── Onay_Bekleyenler.py
 │   └── Açık_İşler.py
 │
 ├── requirements.txt
@@ -82,6 +83,7 @@ MongoDB'in localhost:27017'de çalışıyor olması gerekir.
 📬 İletişim
 Bu modül, TEV Dijital Dönüşüm kapsamında geliştirilmiştir.
 """
+
 
 
 
