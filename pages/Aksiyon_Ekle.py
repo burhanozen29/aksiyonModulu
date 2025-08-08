@@ -12,7 +12,7 @@ import time
 import os
 from datetime import datetime
 from aksiyon_kpi_modulu.database import tev_calisan
-from aksiyon_kpi_modulu.config import TEV_AKSIYON
+from aksiyon_kpi_modulu.config import TEV_AKSIYON, LOG_DOSYA
 
 if not st.session_state.get("giris_yapildi", False):
     st.warning("🔒 Bu sayfaya erişmek için önce giriş yapmalısınız.")
@@ -27,12 +27,25 @@ def reset_modul():
         "Sorumlu Kişi" : [sorumlu_kisi_sec],
         "İşi Yapacak Birim" : [isi_yapacak_birim_sec],
         "İşi Yapacak Kişi" : [isi_yapacak_kisi_sec],
-        "Ölçü Birimi" : [olcu_ekle],
-        "Referans Değeri":[refDeger],
-        "MinMax":[minMax],
         "Termin Tarihi":[terminTarihi],
+        "Durum":"Bekliyor",
         "Aksiyon Ekleme Tarihi":datetime.now()
     })
+    
+    
+    log_df = pd.read_excel(LOG_DOSYA)
+    yeni_log = pd.DataFrame([{
+        "Zaman": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "Kullanıcı": st.session_state.get("isim"),
+        "Aksiyon": [modul_icerik],
+        "Durum": "Aksiyon Oluşturuldu",
+        "Açıklama": "",
+        "Yüklenen Dosya": "",
+        "Aşama":"Aksiyon Ekle"
+    }])
+    log_df = pd.concat([log_df, yeni_log], ignore_index=True)
+    log_df.to_excel(LOG_DOSYA, index=False)
+    
 
     if os.path.exists(TEV_AKSIYON):
         mevcut_df = pd.read_excel(TEV_AKSIYON)
@@ -43,10 +56,9 @@ def reset_modul():
     guncel_df.to_excel(TEV_AKSIYON, index=False)
     st.success("✅ Veri başarıyla eklendi!")
     time.sleep(2)
-    st.session_state.clear()
 
 moduller = ["Süreç Kararları","Toplantı Kararları","Diğer Kararlar"]
-modul_ekle = st.selectbox("Modül Seç", options=moduller, index=None, key="modul")
+modul_ekle = st.selectbox("Modül Seç", options=moduller, index=None, key="modul",placeholder="Uygun modülü seçin")
 
 if modul_ekle:
     modul_icerik = st.text_area(f"{modul_ekle} içeriğini girin", key="içerik")
@@ -54,25 +66,21 @@ if modul_ekle:
         veriler = list(tev_calisan.find())
         kullanıcılar = pd.DataFrame(veriler)
         sorumlu_kullanıcılar = kullanıcılar[kullanıcılar["Bağlı Kişi Birim"].isin(["-", "Genel Müdürlük"]) == False]
-        sorumlu_birim_sec = st.selectbox("Sorumlu Birim Seç", options=sorumlu_kullanıcılar["Birim"].unique(), index=None, key="sorumluBirim")
+        sorumlu_birim_sec = st.selectbox("Sorumlu Birim Seç", options=sorumlu_kullanıcılar["Birim"].unique(), 
+                                         index=None, key="sorumluBirim", placeholder="Aksiyondan sorumlu birimi seçin")
 
         if sorumlu_birim_sec:
-            sorumlu_kisi_sec = st.selectbox("Sorumlu Kişi Seç", options=sorumlu_kullanıcılar[sorumlu_kullanıcılar["Birim"] == sorumlu_birim_sec]["İsim"], index=None, key="sorumluKişi")
+            sorumlu_kisi_sec = st.selectbox("Sorumlu Kişi Seç",
+                                            options=sorumlu_kullanıcılar[sorumlu_kullanıcılar["Birim"] == sorumlu_birim_sec]["İsim"], index=None,
+                                            key="sorumluKişi", placeholder = "Aksiyondan sorumlu kişiyi seçin")
             if sorumlu_kisi_sec:
-                isi_yapacak_birim_sec = st.selectbox("İşi Yapacak Birim Seç", options=kullanıcılar["Birim"].unique(), index=None, key="işiYapacakBirim")
+                isi_yapacak_birim_sec = st.selectbox("İşi Yapacak Birim Seç", options=kullanıcılar["Birim"].unique(), index=None, 
+                                                     key="işiYapacakBirim",placeholder="İşi yapacak birimi seçin")
                 if isi_yapacak_birim_sec:
-                    isi_yapacak_kisi_sec = st.selectbox("İşi Yapacak Kişi Seç", options=kullanıcılar[kullanıcılar["Birim"] == isi_yapacak_birim_sec]["İsim"], index=None, key="işiYapacakKişi")
+                    isi_yapacak_kisi_sec = st.selectbox("İşi Yapacak Kişi Seç", options=kullanıcılar[kullanıcılar["Birim"] == isi_yapacak_birim_sec]["İsim"], index=None, 
+                                                        key="işiYapacakKişi",placeholder="İşi yapacak kişiyi seçin")
                     if isi_yapacak_kisi_sec:
-                        olcu_birimi = ["Oran","Sayı"]
-                        olcu_ekle = st.selectbox("Ölçü Birimi Ekle", options=olcu_birimi, index=None, key="ölçüTipi")
-                        if olcu_ekle:
-                            minMax = st.radio("Referans Değeri Sınırı", ["En Az","En Çok"], horizontal=True, index=None, key="minMax")
-                            if minMax:
-                                if olcu_ekle == "Oran":
-                                    refDeger = st.number_input("Referans değeri (0-100%)", min_value=0.0, max_value=100.0, step=0.1, key="referans") / 100
-                                else:
-                                    refDeger = st.number_input("Referans değeri", min_value=0, max_value=1000, step=1, key="referans")
-                                terminTarihi = st.date_input("Termin Tarihi Girin", value=datetime.today(), min_value=datetime.today(), key="termin_tarihi")
-                                if terminTarihi:
-                                    st.button("📌 Aksiyon Ekle", on_click=reset_modul)
+                        terminTarihi = st.date_input("Termin Tarihi Girin", value=datetime.today(), min_value=datetime.today(), key="termin_tarihi")
+                        if terminTarihi:
+                            st.button("📌 Aksiyon Ekle", on_click=reset_modul)
 
