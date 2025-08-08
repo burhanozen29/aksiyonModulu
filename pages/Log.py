@@ -15,7 +15,7 @@ from aksiyon_kpi_modulu.config import LOG_DOSYA
 if not st.session_state.get("giris_yapildi", False):
     st.warning("🔒 Bu sayfaya erişmek için önce giriş yapmalısınız.")
     st.stop()
-st.title("🕓 KPI Güncelleme Geçmişi")
+st.title("🕓 Aksiyon Log Kayıtları")
 if st.session_state.get("rol") != "admin":
     st.warning("Bu sayfaya sadece admin kullanıcılar erişebilir.")
     st.stop()
