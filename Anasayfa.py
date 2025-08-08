@@ -28,12 +28,15 @@ if not st.session_state.giris_yapildi:
             st.session_state.kullanici = st.session_state.kullanici_input
             st.session_state.birimler = sonuc["birimler"]
             st.session_state.rol = sonuc["rol"]
+            st.session_state.bagli_kisi = sonuc["bagli_kisi"]
+            st.session_state.bagli_birim = sonuc["bagli_birim"]
+            st.session_state.isim = sonuc["isim"]
             st.set_option("client.showSidebarNavigation", True)
             if not otomatik:
                 st.rerun()
         else:
             st.session_state.hata_mesaji = "❌ Kullanıcı adı veya şifre hatalı."
-
+        
     st.title("🔐 KPI Takip Sistemi - Giriş")
     st.text_input("Kullanıcı Adı", key="kullanici_input")
     st.text_input("Şifre", type="password", key="sifre", on_change=giris_yap, kwargs={"otomatik": True})
@@ -56,11 +59,14 @@ rol = st.session_state.get("rol", "Yok")
 if not rol or pd.isna(rol):
     rol = "Yok"
 birimler = st.session_state.get("birimler", [])
+bagli_birim = st.session_state.get("bagli_birim","")
+bagli_kisi = st.session_state.get("bagli_kisi","")
+isim = st.session_state.get("isim","")
 
 # Başlık ve karşılama
 st.title("📊 TEV KPI & Aksiyon Takip Platformu")
 st.markdown(f"""
-Merhaba **{kullanici}** 👋  
+Merhaba **{isim}** 👋  
 Bu platform üzerinden birim bazlı aksiyonlarını ve KPI gelişimlerini kolayca takip edebilirsin.
 
 ---
@@ -73,8 +79,9 @@ with col1:
     st.subheader("🧾 Bilgilerin")
     st.markdown(f"""
     **Kullanıcı Rolü:** `{rol}`  
-    **Tanımlı Birimler:**  
-    - {chr(10).join(f"🔹 {b}" for b in birimler)}
+    **Tanımlı Birim:** `{birimler[0]}`  
+    **Bağlı Birim:** `{bagli_birim}`
+    **Bağlı Kişi:** `{bagli_kisi}`
     """)
     st.markdown("📆 **Aktif Çeyrek:** " + f"`{aktif_ceyrek_bul()}`")
 
@@ -87,6 +94,7 @@ with col2:
         - 📈 **Raporlama:** Filtrele, analiz et, Excel'e aktar
         - 📅 **Takvim Görünümü:** Zaman çizelgesi ile aksiyonları izle
         - 📋 **Açık İşler:** Üzerine tanımlı işler listesi
+        - ✅ **Onay Bekleyenler:** Aksiyonların sonuçlarını değerlendirip onaylama/reddetme
         """)
     else:
         st.subheader("🛠️ Kullanabileceğin Modüller")
@@ -98,6 +106,7 @@ with col2:
         - 🕓 **Geçmiş Loglar:** Güncellenen KPI geçmişini görüntüle
         - 📋 **Açık İşler:** Üzerine tanımlı işler listesi
         - 📋 **Kullanıcı Yönetimi:** Kullanıcı bilgileri görüntüleme
+        - ✅ **Onay Bekleyenler:** Aksiyonların sonuçlarını değerlendirip onaylama/reddetme
         """)
 
 st.info("Sol üstteki menüden sayfalara geçiş yapabilirsin. Aksiyonlarını unutma 💡")
