@@ -4,21 +4,21 @@ Bu proje, Türk Eğitim Vakfı’nın KPI ve aksiyon yönetimini kolaylaştırma
 
 ## 🚀 Özellikler
 
-- Giriş ekranı ve kullanıcı doğrulama (MongoDB destekli)
-- KPI ve aksiyon ekleme, güncelleme, loglama
+- Giriş ekranı ve kullanıcı doğrulama
+- KPI ve aksiyon ekleme, güncelleme
+- Gelişmiş loglama
 - Strateji bazlı KPI takibi
 - Timeline görünümü
 - Raporlama ve görselleştirme
 - Şifre maskeli kullanıcı yönetimi
 - Excel dışa aktarma ve dosya yükleme özellikleri
 - Yaklaşan aksiyonların Mail ile bildirimi
+- Onay mekanizması
 
 ## Eklenecek Özellikler
 
 - Oluşturulan aksiyonların mail ile bildirimi (Yeni aksiyon tanımlandığında sistem, ilgili kişilere (sorumlu kişi, işi yapacak kişi) otomatik e-posta gönderir. Opsiyonel olarak "onay bekliyor" statüsünde olur ve yöneticinin onayına sunulur. Onay mekanizması için:Yetkili kullanıcı için onay ekranı (yeni sayfa: “Aksiyon Onay Paneli”)Onay/Reddet butonları, açıklama alanı)
-- Onay mekanizması (Önce birim yöneticisi, ardından gerekirse gm) Onay Aşaması, Onaylayan, Onay Tarihi, Açıklama
 - Yönetici Dashboardu (Tüm raporlar, filtreler, aksiyonlar. KPI doluluk oranları, tamamlanma yüzdesi, en çok geciken işler, en aktif kullanıcılar gibi göstergeler)
-- Gelişmiş Loglama
 - Etkinlik Değerlendirmesi (aksiyon tamamlandıktan sonra Gerçekten işe yaradı mı?Sürdürülebilir mi?Kontrol edildi mi? )
 - Aksiyon Risk Önem Seviyesi
 
@@ -83,6 +83,7 @@ MongoDB'in localhost:27017'de çalışıyor olması gerekir.
 📬 İletişim
 Bu modül, TEV Dijital Dönüşüm kapsamında geliştirilmiştir.
 """
+
 
 
 
